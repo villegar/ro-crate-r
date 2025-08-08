@@ -1,0 +1,43 @@
+#' Capture extra entities
+#'
+#' Capture extra entities, given as inputs to [rocrateR::rocrate] and
+#' [rocrateR::rocrate_5s].
+#'
+#' @inheritParams rocrate
+#'
+#' @returns List with name additional entities.
+#' @keywords internal
+.capture_extra_entities <- function(...) {
+  extra_entities_lst <- list(...)
+  if (length(extra_entities_lst) == 0)
+    return(extra_entities_lst)
+  extra_entities_names <- names(extra_entities_lst)
+  # extract names for extra entities with missing names
+  idx <- is.null(extra_entities_names)
+  new_names <- extra_entities_lst[idx] |>
+    purrr::map_chr(\(x) paste0(tolower(x$`@type`), "_" ,x$`@id`))
+  # assign new names
+  names(extra_entities_lst)[idx] <- new_names
+  return(extra_entities_lst)
+}
+
+#' Validate entity
+#'
+#' @param ent List with new entity.
+#' @param ent_name String with the name of the entity.
+#' @param required Vector with list of keys required for the entity to be valid.
+#'     (default: `c("@id", "@type")`)
+#'
+#' @returns Boolean value to indicate if the given entity is valid.
+#' @keywords internal
+.validate_entity <- function(ent, ent_name = NULL, required = c("@id", "@type")) {
+  has_elements <- required %in% names(ent)
+  if (all(has_elements))
+    return(TRUE)
+
+  # In case there are missing elements from those `required`
+  if (!is.null(ent_name))
+    message("===== Checking: ", ent_name, " =====")
+  message("Missing: \n", paste0("- ", required[!has_elements], collapse = "\n"))
+  return(FALSE)
+}
