@@ -101,7 +101,7 @@ rocrate_5s <- function(...,
   conformsTo <- list(`@id` = paste0("https://w3id.org/5s-crate/", v5scrate))
   new_ro_crate$`@graph`[idx][[1]]$conformsTo <- conformsTo
   new_ro_crate <- new_ro_crate |>
-    add_value(id = "./", key = "conformsTo", conformsTo)
+    add_entity_value(id = "./", key = "conformsTo", conformsTo)
 
   # return the new RO crate with the 5 safes profile
   return(new_ro_crate)
