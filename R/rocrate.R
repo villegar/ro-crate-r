@@ -27,7 +27,7 @@ rocrate <- function(...,
         `@type` = "CreativeWork",
         `@id` = "ro-crate-metadata.json",
         about = list(`@id` = "./"),
-        conformsTo = list(`@id` = conformsTo),
+        conformsTo = list(`@id` = conformsTo)
       ),
       list(
         `@id` = "./",
@@ -46,8 +46,8 @@ rocrate <- function(...,
   )
 
   # validate any additional entities
-  idx <- extra_entities_tbl |>
-    purrr::pmap_lgl(.validate_entity)
+  idx <- seq_len(nrow(extra_entities_tbl)) |>
+    sapply(\(i) do.call(.validate_entity, lapply(extra_entities_tbl, `[[`, i)))
 
   # combine the base crate with any extra entities
   new_ro_crate$`@graph` <- c(new_ro_crate$`@graph`, unname(extra_entities[idx]))
@@ -97,7 +97,7 @@ rocrate_5s <- function(...,
 
   # update the root entity's conformsTo property
   idx <- new_ro_crate$`@graph` |>
-    purrr::map_lgl(\(x) x$`@id` == "./" && is.null(getElement(x, "conformsTo")))
+    sapply(\(x) x$`@id` == "./" && is.null(getElement(x, "conformsTo")))
   conformsTo <- list(`@id` = paste0("https://w3id.org/5s-crate/", v5scrate))
   new_ro_crate$`@graph`[idx][[1]]$conformsTo <- conformsTo
   new_ro_crate <- new_ro_crate |>

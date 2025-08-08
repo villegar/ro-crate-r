@@ -15,7 +15,7 @@
   # extract names for extra entities with missing names
   idx <- is.null(extra_entities_names)
   new_names <- extra_entities_lst[idx] |>
-    purrr::map_chr(\(x) paste0(tolower(x$`@type`), "_" ,x$`@id`))
+    sapply(\(x) paste0(tolower(x$`@type`), "_" ,x$`@id`))
   # assign new names
   names(extra_entities_lst)[idx] <- new_names
   return(extra_entities_lst)
