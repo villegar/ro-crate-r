@@ -24,8 +24,8 @@ rocrate <- function(...,
     `@context` = context,
     `@graph` = list(
       list(
-        `@type` = "CreativeWork",
         `@id` = "ro-crate-metadata.json",
+        `@type` = "CreativeWork",
         about = list(`@id` = "./"),
         conformsTo = list(`@id` = conformsTo)
       ),
@@ -50,7 +50,8 @@ rocrate <- function(...,
     sapply(\(i) do.call(.validate_entity, lapply(extra_entities_tbl, `[[`, i)))
 
   # combine the base crate with any extra entities
-  new_ro_crate$`@graph` <- c(new_ro_crate$`@graph`, unname(extra_entities[idx]))
+  if (length(idx) > 0)
+    new_ro_crate$`@graph` <- c(new_ro_crate$`@graph`, unname(extra_entities[idx]))
 
   # set class for the new object
   class(new_ro_crate) <- c("rocrate", class(new_ro_crate))
@@ -88,21 +89,20 @@ rocrate_5s <- function(...,
     name = "Five Safes RO-Crate profile"
   )
 
-  # create basic RO crate
+  # create basic RO-Crate
   new_ro_crate <- rocrate(..., context = context, conformsTo = conformsTo)
-  # c(list(prof_5scrate = prof_5scrate), extra_entities)
 
-  # attach the 5 safes profile entity
-  new_ro_crate$`@graph` <- c(new_ro_crate$`@graph`, prof_5scrate)
-
-  # update the root entity's conformsTo property
-  idx <- new_ro_crate$`@graph` |>
-    sapply(\(x) x$`@id` == "./" && is.null(getElement(x, "conformsTo")))
-  conformsTo <- list(`@id` = paste0("https://w3id.org/5s-crate/", v5scrate))
-  new_ro_crate$`@graph`[idx][[1]]$conformsTo <- conformsTo
+  # edit the new RO-Crate
   new_ro_crate <- new_ro_crate |>
-    add_entity_value(id = "./", key = "conformsTo", conformsTo)
+    # attach the 5 safes profile entity
+    add_entity(prof_5scrate) |>
+    # update the root entity's conformsTo property
+    add_entity_value(
+      id = "./",
+      key = "conformsTo",
+      value = list(`@id` = paste0("https://w3id.org/5s-crate/", v5scrate))
+    )
 
-  # return the new RO crate with the 5 safes profile
+  # return the new RO-Crate with the 5 safes profile
   return(new_ro_crate)
 }
