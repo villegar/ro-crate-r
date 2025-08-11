@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rocrateR
+# rocrateR: RO-Crate R Package Wrapper
 
 <!-- badges: start -->
 
@@ -9,23 +9,61 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rocrateR)](https://CRAN.R-project.org/package=rocrateR)
+[![R-CMD-check](https://github.com/villegar/ro-crate-r/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/villegar/ro-crate-r/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/villegar/ro-crate-r/graph/badge.svg)](https://app.codecov.io/gh/villegar/ro-crate-r)
 <!-- badges: end -->
 
-The goal of rocrateR is to …
+The goal of rocrateR is to provide an R package for creating,
+manipulating and reading RO-Crates. Latest supported version 1.2 of the
+specification.
 
 ## Installation
 
 You can install the development version of rocrateR like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# install.packages("remotes")
+remotes::install_github("villegar/ro-crate-r", "main")
+
+OR
+
+remotes::install_github("ResearchObject/ro-crate-r", "main")
 ```
 
-## Example
+## First RO-Crate
 
-This is a basic example which shows you how to solve a common problem:
+The following command creates an RO-Crate Metadata descriptor
+(`ro-crate-metadata.json`). This should be stored inside the root (`./`)
+of your RO-Crate.
 
 ``` r
-library(rocrateR)
-## basic example code
+# library(rocrateR)
+my_first_ro_crate <- rocrateR::rocrate()
+```
+
+This object is a list with the basic components of an RO-Crate. It can
+be visualised in the console with the `print` command:
+
+``` r
+print(my_first_ro_crate)
+#> {
+#>   "@context": "https://w3id.org/ro/crate/1.2/context",
+#>   "@graph": [
+#>     {
+#>       "@id": "ro-crate-metadata.json",
+#>       "@type": "CreativeWork",
+#>       "about": {
+#>         "@id": "./"
+#>       },
+#>       "conformsTo": {
+#>         "@id": "https://w3id.org/ro/crate/1.2"
+#>       }
+#>     },
+#>     {
+#>       "@id": "./",
+#>       "@type": "Dataset"
+#>     }
+#>   ]
+#> }
 ```
