@@ -56,6 +56,20 @@ This object can be saved to disk using the following command:
 
 ```{r, eval = FALSE}
 my_first_ro_crate |>
-  rocrateR::write_json("/path/to/ro-crate/ro-crate-metadata.json")
+  rocrateR::write_rocrate("/path/to/ro-crate/ro-crate-metadata.json")
+```
+
+For example, using a temporary directory:
+
+```{r}
+tmp <- file.path(tempdir(), "ro-crate-metadata.json")
+my_first_ro_crate |>
+  rocrateR::write_rocrate(tmp)
+
+# load lines / flat file
+readLines(tmp)
+
+# delete temporal file
+unlink(tmp)
 ```
 

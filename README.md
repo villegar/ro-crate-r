@@ -72,5 +72,38 @@ This object can be saved to disk using the following command:
 
 ``` r
 my_first_ro_crate |>
-  rocrateR::write_json("/path/to/ro-crate/ro-crate-metadata.json")
+  rocrateR::write_rocrate("/path/to/ro-crate/ro-crate-metadata.json")
+```
+
+For example, using a temporary directory:
+
+``` r
+tmp <- file.path(tempdir(), "ro-crate-metadata.json")
+my_first_ro_crate |>
+  rocrateR::write_rocrate(tmp)
+
+# load lines / flat file
+readLines(tmp)
+#>  [1] "{"                                                         
+#>  [2] "  \"@context\": \"https://w3id.org/ro/crate/1.2/context\","
+#>  [3] "  \"@graph\": ["                                           
+#>  [4] "    {"                                                     
+#>  [5] "      \"@id\": \"ro-crate-metadata.json\","                
+#>  [6] "      \"@type\": \"CreativeWork\","                        
+#>  [7] "      \"about\": {"                                        
+#>  [8] "        \"@id\": \"./\""                                   
+#>  [9] "      },"                                                  
+#> [10] "      \"conformsTo\": {"                                   
+#> [11] "        \"@id\": \"https://w3id.org/ro/crate/1.2\""        
+#> [12] "      }"                                                   
+#> [13] "    },"                                                    
+#> [14] "    {"                                                     
+#> [15] "      \"@id\": \"./\","                                    
+#> [16] "      \"@type\": \"Dataset\""                              
+#> [17] "    }"                                                     
+#> [18] "  ]"                                                       
+#> [19] "}"
+
+# delete temporal file
+unlink(tmp)
 ```
