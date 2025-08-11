@@ -48,11 +48,7 @@
 
 #' Validate entity
 #'
-#' @param x New entity. If a `character` is given, this is assumed to be the
-#'     entity `@id`, if a `list` is given, this is assumed to be a complete
-#'     entity.
-#' @param ... Optional additional entity values/properties. Used when `x` is
-#'     NOT a `list`.
+#' @inheritParams data_entity
 #' @param ent_name String with the name of the entity.
 #' @param required Vector with list of keys required for the entity to be valid.
 #'     (default: `c("@id", "@type")`)
