@@ -52,3 +52,10 @@ This object is a list with the basic components of an RO-Crate. It can be visual
 print(my_first_ro_crate)
 ```
 
+This object can be saved to disk using the following command:
+
+```{r, eval = FALSE}
+my_first_ro_crate |>
+  rocrateR::write_json("/path/to/ro-crate/ro-crate-metadata.json")
+```
+

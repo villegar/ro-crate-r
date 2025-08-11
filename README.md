@@ -67,3 +67,10 @@ print(my_first_ro_crate)
 #>   ]
 #> }
 ```
+
+This object can be saved to disk using the following command:
+
+``` r
+my_first_ro_crate |>
+  rocrateR::write_json("/path/to/ro-crate/ro-crate-metadata.json")
+```
