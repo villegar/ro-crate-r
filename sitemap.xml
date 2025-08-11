@@ -14,9 +14,10 @@
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/is_rocrate.html</loc></url>
 <url><loc>/reference/print.rocrate.html</loc></url>
+<url><loc>/reference/read_rocrate.html</loc></url>
 <url><loc>/reference/rocrate.html</loc></url>
 <url><loc>/reference/rocrateR-package.html</loc></url>
 <url><loc>/reference/rocrate_5s.html</loc></url>
-<url><loc>/reference/write_json.html</loc></url>
+<url><loc>/reference/write_rocrate.html</loc></url>
 </urlset>
 

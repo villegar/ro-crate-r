@@ -105,7 +105,37 @@
 <p>This object can be saved to disk using the following command:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_first_ro_crate</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/write_json.html">write_json</a></span><span class="op">(</span><span class="st">"/path/to/ro-crate/ro-crate-metadata.json"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/write_rocrate.html">write_rocrate</a></span><span class="op">(</span><span class="st">"/path/to/ro-crate/ro-crate-metadata.json"</span><span class="op">)</span></span></code></pre></div>
+<p>For example, using a temporary directory:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"ro-crate-metadata.json"</span><span class="op">)</span></span>
+<span><span class="va">my_first_ro_crate</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/write_rocrate.html">write_rocrate</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># load lines / flat file</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "{"                                                         </span></span>
+<span><span class="co">#&gt;  [2] "  \"@context\": \"https://w3id.org/ro/crate/1.2/context\","</span></span>
+<span><span class="co">#&gt;  [3] "  \"@graph\": ["                                           </span></span>
+<span><span class="co">#&gt;  [4] "    {"                                                     </span></span>
+<span><span class="co">#&gt;  [5] "      \"@id\": \"ro-crate-metadata.json\","                </span></span>
+<span><span class="co">#&gt;  [6] "      \"@type\": \"CreativeWork\","                        </span></span>
+<span><span class="co">#&gt;  [7] "      \"about\": {"                                        </span></span>
+<span><span class="co">#&gt;  [8] "        \"@id\": \"./\""                                   </span></span>
+<span><span class="co">#&gt;  [9] "      },"                                                  </span></span>
+<span><span class="co">#&gt; [10] "      \"conformsTo\": {"                                   </span></span>
+<span><span class="co">#&gt; [11] "        \"@id\": \"https://w3id.org/ro/crate/1.2\""        </span></span>
+<span><span class="co">#&gt; [12] "      }"                                                   </span></span>
+<span><span class="co">#&gt; [13] "    },"                                                    </span></span>
+<span><span class="co">#&gt; [14] "    {"                                                     </span></span>
+<span><span class="co">#&gt; [15] "      \"@id\": \"./\","                                    </span></span>
+<span><span class="co">#&gt; [16] "      \"@type\": \"Dataset\""                              </span></span>
+<span><span class="co">#&gt; [17] "    }"                                                     </span></span>
+<span><span class="co">#&gt; [18] "  ]"                                                       </span></span>
+<span><span class="co">#&gt; [19] "}"</span></span>
+<span></span>
+<span><span class="co"># delete temporal file</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </div>
