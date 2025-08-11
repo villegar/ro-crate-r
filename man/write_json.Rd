@@ -2,7 +2,6 @@
 % Please edit documentation in R/utils_json.R
 \name{write_json}
 \alias{write_json}
-\alias{save_rocrate}
 \title{Wrapper for \link[jsonlite:read_json]{jsonlite::write_json}}
 \usage{
 write_json(x, path, ...)
