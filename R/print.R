@@ -1,6 +1,6 @@
-#' Print RO-crate
+#' Print RO-Crate
 #'
-#' Print RO-crate, S3 method for class 'rocrate'. Creates a temporal JSON file,
+#' Print RO-Crate, S3 method for class 'rocrate'. Creates a temporal JSON file,
 #' which then is displayed with the [message] function.
 #'
 #' @param x RO-Crate object, see [rocrateR::rocrate].
