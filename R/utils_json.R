@@ -30,7 +30,7 @@ read_rocrate <- function(path, simplifyVector = FALSE, ...) {
 #'
 #' @returns Invisibly the input RO-Crate, `x`.
 #' @export
-write_json <- function(x, path, ...) {
+write_rocrate <- function(x, path, ...) {
   # check the `x` object
   is_rocrate(x)
 
