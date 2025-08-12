@@ -51,6 +51,19 @@
     <h2>Source</h2>
     <p>https://stackoverflow.com/a/73952264</p>
     </div>
+    <div id="arguments">
+    <h2>Arguments</h2>
+
+
+<dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
+<dd><p>String with URL to validate.</p></dd>
+
+
+<dt id="arg-suffix">suffix<a class="anchor" aria-label="anchor" href="#arg-suffix"></a></dt>
+<dd><p>String with any additional characters to match when validating
+the given URL, <code>x</code>.</p></dd>
+
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>Boolean value indicating if the given string (`x) is a valid URL.</p>
@@ -67,10 +80,10 @@
 <span class="r-in"><span>  <span class="st">"https://w3id.org/ro/crate/1.1/context"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"https://w3id.org/ro/crate/1.0/context"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">.is_valid_url</span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .is_valid_url(url):</span> could not find function ".is_valid_url"</span>
-<span class="r-in"><span><span class="fu">.is_valid_url</span><span class="op">(</span><span class="va">url</span>, suffix <span class="op">=</span> <span class="st">"/context"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .is_valid_url(url, suffix = "/context"):</span> could not find function ".is_valid_url"</span>
+<span class="r-in"><span><span class="fu">rocrateR</span><span class="fu">:::</span><span class="fu">.is_valid_url</span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE</span>
+<span class="r-in"><span><span class="fu">rocrateR</span><span class="fu">:::</span><span class="fu">.is_valid_url</span><span class="op">(</span><span class="va">url</span>, suffix <span class="op">=</span> <span class="st">"/context"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE</span>
 </code></pre></div>
     </div>
   </div>
