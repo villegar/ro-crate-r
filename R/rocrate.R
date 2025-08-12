@@ -12,7 +12,7 @@
 #'     specification which this object conforms to. Conformance declares which
 #'     RO-Crate conventions of using those terms are being followed.
 #'
-#' @returns RO-Crate object, list with an additional class, {rocrate}.
+#' @returns RO-Crate object, list with an additional class, `rocrate`.
 #' @export
 #'
 #' @examples
@@ -72,7 +72,7 @@ rocrate <- function(...,
 #' @param v5scrate Numeric value with the version of the 5 Safes RO-Crate
 #'     profile to use.
 #'
-#' @returns 5 Safes RO-Crate object, list with an additional class, {rocrate}.
+#' @returns 5 Safes RO-Crate object, list with an additional class, `rocrate`.
 #' @export
 #'
 #' @examples

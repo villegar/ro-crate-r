@@ -62,8 +62,8 @@ add_entity <- function(rocrate, entity, overwrite = FALSE) {
 
 #' Add entity value to RO-Crate
 #'
-#' Add entity value to RO-Crate, under entity with `@id` = {id}, using the
-#' pair {key}-{value} within `@graph`.
+#' Add entity value to RO-Crate, under entity with `@id` = `{id}`, using the
+#' pair `{key}`-`{value}` within `@graph`.
 #'
 #' @inheritParams is_rocrate
 #' @param id String with the ID of the RO-Crate entity within `@graph`
