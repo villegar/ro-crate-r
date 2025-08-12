@@ -62,19 +62,19 @@
 
 <p>The goal of rocrateR is to provide an R package for creating, manipulating and reading RO-Crates. Latest supported version 1.2 of the specification.</p>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="id_0-installation">0. Installation<a class="anchor" aria-label="anchor" href="#id_0-installation"></a>
 </h2>
 <p>You can install the development version of rocrateR like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"villegar/ro-crate-r"</span>, <span class="st">"main"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"villegar/ro-crate-r@main"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">OR</span></span>
 <span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ResearchObject/ro-crate-r"</span>, <span class="st">"main"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"ResearchObject/ro-crate-r@main"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="first-ro-crate">First RO-Crate<a class="anchor" aria-label="anchor" href="#first-ro-crate"></a>
+<h2 id="id_1-first-ro-crate">1. First RO-Crate<a class="anchor" aria-label="anchor" href="#id_1-first-ro-crate"></a>
 </h2>
 <p>The following command creates an RO-Crate Metadata descriptor (<code>ro-crate-metadata.json</code>). This should be stored inside the root (<code>./</code>) of your RO-Crate.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -136,6 +136,78 @@
 <span></span>
 <span><span class="co"># delete temporal file</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="id_2-adding-additional-entities">2. Adding additional entities<a class="anchor" aria-label="anchor" href="#id_2-adding-additional-entities"></a>
+</h2>
+<p>In the previous section we created a very basic RO-Crate with the <code><a href="reference/rocrate.html">rocrateR::rocrate()</a></code> function; however, you are likely to include additional entities in your RO-Crate. Entities must contain at least two components <code>@id</code> and <code>@type</code> (see <a href="https://w3id.org/ro/crate/1.2" class="external-link uri">https://w3id.org/ro/crate/1.2</a> for details).</p>
+<p>For example, a contextual entity can be defined as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create entity for an organisation</span></span>
+<span><span class="va">organisation_uol</span> <span class="op">&lt;-</span> <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/entity.html">entity</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="st">"https://ror.org/04xs57h96"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"Organization"</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">"University of Liverpool"</span>,</span>
+<span>  url <span class="op">=</span> <span class="st">"http://www.liv.ac.uk"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create an entity for a person</span></span>
+<span><span class="va">person_rvd</span> <span class="op">&lt;-</span> <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/entity.html">entity</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="st">"https://orcid.org/0000-0001-5036-8661"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"Person"</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">"Roberto Villegas-Diaz"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>These two can be linked to each other via the <code>@id</code> field:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">person_rvd</span><span class="op">$</span><span class="va">affiliation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>`@id` <span class="op">=</span> <span class="va">organisation_uol</span><span class="op">$</span><span class="va">`@id`</span><span class="op">)</span></span></code></pre></div>
+<p>These entities can be attached to an RO-Crate using the <code><a href="reference/add_entity.html">rocrateR::add_entity()</a></code> function:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_second_ro_crate</span> <span class="op">&lt;-</span> <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/rocrate.html">rocrate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/add_entity.html">add_entity</a></span><span class="op">(</span><span class="va">person_rvd</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/add_entity_value.html">add_entity_value</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"./"</span>, key <span class="op">=</span> <span class="st">"author"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>`@id` <span class="op">=</span> <span class="va">person_rvd</span><span class="op">$</span><span class="va">`@id`</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/add_entity.html">add_entity</a></span><span class="op">(</span><span class="va">organisation_uol</span><span class="op">)</span></span></code></pre></div>
+<p>Alternatively, the same result can be achieved with the following code:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_second_ro_crate</span> <span class="op">&lt;-</span> <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/rocrate.html">rocrate</a></span><span class="op">(</span><span class="va">person_rvd</span>, <span class="va">organisation_uol</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">rocrateR</span><span class="fu">::</span><span class="fu"><a href="reference/add_entity_value.html">add_entity_value</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"./"</span>, key <span class="op">=</span> <span class="st">"author"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>`@id` <span class="op">=</span> <span class="va">person_rvd</span><span class="op">$</span><span class="va">`@id`</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">my_second_ro_crate</span><span class="op">)</span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt;   "@context": "https://w3id.org/ro/crate/1.2/context",</span></span>
+<span><span class="co">#&gt;   "@graph": [</span></span>
+<span><span class="co">#&gt;     {</span></span>
+<span><span class="co">#&gt;       "@id": "ro-crate-metadata.json",</span></span>
+<span><span class="co">#&gt;       "@type": "CreativeWork",</span></span>
+<span><span class="co">#&gt;       "about": {</span></span>
+<span><span class="co">#&gt;         "@id": "./"</span></span>
+<span><span class="co">#&gt;       },</span></span>
+<span><span class="co">#&gt;       "conformsTo": {</span></span>
+<span><span class="co">#&gt;         "@id": "https://w3id.org/ro/crate/1.2"</span></span>
+<span><span class="co">#&gt;       }</span></span>
+<span><span class="co">#&gt;     },</span></span>
+<span><span class="co">#&gt;     {</span></span>
+<span><span class="co">#&gt;       "@id": "./",</span></span>
+<span><span class="co">#&gt;       "@type": "Dataset",</span></span>
+<span><span class="co">#&gt;       "author": {</span></span>
+<span><span class="co">#&gt;         "@id": "https://orcid.org/0000-0001-5036-8661"</span></span>
+<span><span class="co">#&gt;       }</span></span>
+<span><span class="co">#&gt;     },</span></span>
+<span><span class="co">#&gt;     {</span></span>
+<span><span class="co">#&gt;       "@id": "https://orcid.org/0000-0001-5036-8661",</span></span>
+<span><span class="co">#&gt;       "@type": "Person",</span></span>
+<span><span class="co">#&gt;       "name": "Roberto Villegas-Diaz",</span></span>
+<span><span class="co">#&gt;       "affiliation": {</span></span>
+<span><span class="co">#&gt;         "@id": "https://ror.org/04xs57h96"</span></span>
+<span><span class="co">#&gt;       }</span></span>
+<span><span class="co">#&gt;     },</span></span>
+<span><span class="co">#&gt;     {</span></span>
+<span><span class="co">#&gt;       "@id": "https://ror.org/04xs57h96",</span></span>
+<span><span class="co">#&gt;       "@type": "Organization",</span></span>
+<span><span class="co">#&gt;       "name": "University of Liverpool",</span></span>
+<span><span class="co">#&gt;       "url": "http://www.liv.ac.uk"</span></span>
+<span><span class="co">#&gt;     }</span></span>
+<span><span class="co">#&gt;   ]</span></span>
+<span><span class="co">#&gt; }</span></span></code></pre></div>
 </div>
 </div>
   </div>
