@@ -13,7 +13,7 @@
 #' basic_crate <- rocrateR::rocrate()
 #'
 #' # create entity for an organisation
-#' organisation_uol <- rocrateR::data_entity(
+#' organisation_uol <- rocrateR::entity(
 #'   x = "https://ror.org/04xs57h96",
 #'   type = "Organization",
 #'   name = "University of Liverpool",
@@ -21,7 +21,7 @@
 #' )
 #'
 #' # create an entity for a person
-#' person_rvd <- rocrateR::data_entity(
+#' person_rvd <- rocrateR::entity(
 #'   x = "https://orcid.org/0000-0001-5036-8661",
 #'   type = "Person",
 #'   name = "Roberto Villegas-Diaz",
@@ -79,7 +79,7 @@ add_entity <- function(rocrate, entity, overwrite = FALSE) {
 #' basic_crate <- rocrate()
 #'
 #' # create entity for an organisation
-#' organisation_uol <- rocrateR::data_entity(
+#' organisation_uol <- rocrateR::entity(
 #'   x = "https://ror.org/04xs57h96",
 #'   type = "Organization",
 #'   name = "University of Liverpool",
@@ -87,7 +87,7 @@ add_entity <- function(rocrate, entity, overwrite = FALSE) {
 #' )
 #'
 #' # create an entity for a person
-#' person_rvd <- rocrateR::data_entity(
+#' person_rvd <- rocrateR::entity(
 #'   x = "https://orcid.org/0000-0001-5036-8661",
 #'   type = "Person",
 #'   name = "Roberto Villegas-Diaz",
@@ -126,7 +126,7 @@ add_entity_value <- function(rocrate, id, key, value, overwrite = TRUE) {
 #'
 #' @examples
 #' # create entity for an organisation
-#' organisation_uol <- rocrateR::data_entity(
+#' organisation_uol <- rocrateR::entity(
 #'   x = "https://ror.org/04xs57h96",
 #'   type = "Organization",
 #'   name = "University of Liverpool",
@@ -134,22 +134,22 @@ add_entity_value <- function(rocrate, id, key, value, overwrite = TRUE) {
 #' )
 #'
 #' # create an entity for a person
-#' person_rvd <- rocrateR::data_entity(
+#' person_rvd <- rocrateR::entity(
 #'   x = "https://orcid.org/0000-0001-5036-8661",
 #'   type = "Person",
 #'   name = "Roberto Villegas-Diaz",
 #'   affiliation = list(`@id` = organisation_uol$`@id`)
 #' )
 #'
-data_entity <- function(x, ...) {
+entity <- function(x, ...) {
   if (!.validate_entity(x, ...)) {
     stop("Invalid data entity (see above)!")
   }
-  UseMethod("data_entity", x)
+  UseMethod("entity", x)
 }
 
 #' @export
-data_entity.default <- function(x, ...) {
+entity.default <- function(x, ...) {
   args <- list(...)
   list(
     `@id` = c(x, getElement(args, "id"))[1],
@@ -160,18 +160,18 @@ data_entity.default <- function(x, ...) {
 }
 
 #' @export
-data_entity.organisation <- function(x, ...) {
-  data_entity.organization(x, ...)
+entity.organisation <- function(x, ...) {
+  entity.organization(x, ...)
 }
 
 #' @export
-data_entity.organization <- function(x, ...) {
+entity.organization <- function(x, ...) {
   args <- list(...)
   list(`@id` = getElement(args, "id"), `@type` = "Organization")
 }
 
 #' @export
-data_entity.person <- function(x, ...) {
+entity.person <- function(x, ...) {
   args <- list(...)
   list(`@id` = getElement(args, "id"), `@type` = "Person")
 }
@@ -189,7 +189,7 @@ data_entity.person <- function(x, ...) {
 #' basic_crate <- rocrateR::rocrate()
 #'
 #' # create entity for an organisation
-#' organisation_uol <- rocrateR::data_entity(
+#' organisation_uol <- rocrateR::entity(
 #'   x = "https://ror.org/04xs57h96",
 #'   type = "Organization",
 #'   name = "University of Liverpool",
@@ -197,7 +197,7 @@ data_entity.person <- function(x, ...) {
 #' )
 #'
 #' # create an entity for a person
-#' person_rvd <- rocrateR::data_entity(
+#' person_rvd <- rocrateR::entity(
 #'   x = "https://orcid.org/0000-0001-5036-8661",
 #'   type = "Person",
 #'   name = "Roberto Villegas-Diaz",

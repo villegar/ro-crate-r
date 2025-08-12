@@ -49,7 +49,7 @@
 
 #' Validate entity
 #'
-#' @inheritParams data_entity
+#' @inheritParams entity
 #' @param ent_name String with the name of the entity.
 #' @param required Vector with list of keys required for the entity to be valid.
 #'     (default: `c("@id", "@type")`)

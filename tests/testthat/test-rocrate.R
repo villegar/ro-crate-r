@@ -3,7 +3,7 @@ test_that("rocrate works", {
   expect_contains(class(basic_crate), "rocrate")
 
   # create entity for an organisation
-  organisation_uol <- rocrateR::data_entity(
+  organisation_uol <- rocrateR::entity(
     x = "https://ror.org/04xs57h96",
     type = "Organization",
     name = "University of Liverpool",
@@ -11,7 +11,7 @@ test_that("rocrate works", {
   )
 
   # create an entity for a person
-  person_rvd <- rocrateR::data_entity(
+  person_rvd <- rocrateR::entity(
     x = "https://orcid.org/0000-0001-5036-8661",
     type = "Person",
     name = "Roberto Villegas-Diaz",
