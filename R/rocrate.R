@@ -40,7 +40,7 @@ rocrate <- function(...,
   # capture additional entities
   extra_entities <- .capture_extra_entities(...)
   extra_entities_tbl <- tibble::tibble(
-    ent = extra_entities,
+    x = extra_entities,
     ent_name = names(extra_entities),
     required = list(c("@id", "@type"))
   )
