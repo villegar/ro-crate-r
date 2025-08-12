@@ -142,9 +142,7 @@ add_entity_value <- function(rocrate, id, key, value, overwrite = TRUE) {
 #' )
 #'
 entity <- function(x, ...) {
-  if (!.validate_entity(x, ...)) {
-    stop("Invalid data entity (see above)!")
-  }
+  .validate_entity(x, ...)
   UseMethod("entity", x)
 }
 
@@ -157,23 +155,6 @@ entity.default <- function(x, ...) {
   ) |>
     # append any additional properties
     c(suppressWarnings(within(args, rm(id, type))))
-}
-
-#' @export
-entity.organisation <- function(x, ...) {
-  entity.organization(x, ...)
-}
-
-#' @export
-entity.organization <- function(x, ...) {
-  args <- list(...)
-  list(`@id` = getElement(args, "id"), `@type` = "Organization")
-}
-
-#' @export
-entity.person <- function(x, ...) {
-  args <- list(...)
-  list(`@id` = getElement(args, "id"), `@type` = "Person")
 }
 
 #' Remove entity
