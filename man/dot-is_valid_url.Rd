@@ -9,6 +9,12 @@ https://stackoverflow.com/a/73952264
 \usage{
 .is_valid_url(x, suffix = "")
 }
+\arguments{
+\item{x}{String with URL to validate.}
+
+\item{suffix}{String with any additional characters to match when validating
+the given URL, \code{x}.}
+}
 \value{
 Boolean value indicating if the given string (`x) is a valid URL.
 }
@@ -25,7 +31,7 @@ url <- c(
   "https://w3id.org/ro/crate/1.1/context",
   "https://w3id.org/ro/crate/1.0/context"
 )
-.is_valid_url(url)
-.is_valid_url(url, suffix = "/context")
+rocrateR:::.is_valid_url(url)
+rocrateR:::.is_valid_url(url, suffix = "/context")
 }
 \keyword{internal}

@@ -25,7 +25,7 @@ RO-Crate conventions of using those terms are being followed.}
 profile to use.}
 }
 \value{
-5 Safes RO-Crate object, list with an additional class, {rocrate}.
+5 Safes RO-Crate object, list with an additional class, \code{rocrate}.
 }
 \description{
 Create a new 5 Safes RO-Crate object. This object includes basic skeleton

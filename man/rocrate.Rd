@@ -21,7 +21,7 @@ specification which this object conforms to. Conformance declares which
 RO-Crate conventions of using those terms are being followed.}
 }
 \value{
-RO-Crate object, list with an additional class, {rocrate}.
+RO-Crate object, list with an additional class, \code{rocrate}.
 }
 \description{
 Create a new RO-Crate object. This object includes basic skeleton for the

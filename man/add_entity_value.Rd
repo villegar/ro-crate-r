@@ -22,8 +22,8 @@ should be overwritten (default: \code{TRUE}).}
 RO-Crate object.
 }
 \description{
-Add entity value to RO-Crate, under entity with \verb{@id} = {id}, using the
-pair {key}-{value} within \verb{@graph}.
+Add entity value to RO-Crate, under entity with \verb{@id} = \code{{id}}, using the
+pair \code{{key}}-\code{{value}} within \verb{@graph}.
 }
 \examples{
 basic_crate <- rocrate()
