@@ -19,7 +19,7 @@ add_entity_value(rocrate, id, key, value, overwrite = TRUE)
 should be overwritten (default: \code{TRUE}).}
 }
 \value{
-RO-Crate object
+RO-Crate object.
 }
 \description{
 Add entity value to RO-Crate, under entity with \verb{@id} = {id}, using the

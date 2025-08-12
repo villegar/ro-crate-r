@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-rocrate.R
 \name{is_rocrate}
 \alias{is_rocrate}
-\title{Check if a given has the \code{rocrate} class}
+\title{Check if object is an RO-Crate}
 \usage{
 is_rocrate(rocrate)
 }
@@ -10,9 +10,15 @@ is_rocrate(rocrate)
 \item{rocrate}{RO-Crate object, see \link{rocrate}.}
 }
 \value{
-Nothing, call for its side effect.
+Returns invisibly the input RO-Crate object.
 }
 \description{
-Check if a given has the \code{rocrate} class
+Check if object is an RO-Crate
 }
-\keyword{internal}
+\examples{
+basic_crate <- rocrateR::rocrate()
+
+# check if the new crate is valid
+basic_crate |>
+  rocrateR::is_rocrate()
+}
