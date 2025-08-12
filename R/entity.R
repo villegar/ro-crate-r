@@ -6,11 +6,11 @@
 #' @param overwrite Boolean flag to indicate if the entity (if found in the
 #'     given RO-Crate) should be overwritten.
 #'
-#' @returns Updated RO-Crate with the new entity
+#' @returns Updated RO-Crate with the new entity.
 #' @export
 #'
 #' @examples
-#' basic_crate <- rocrate()
+#' basic_crate <- rocrateR::rocrate()
 #'
 #' # create entity for an organisation
 #' organisation_uol <- rocrateR::data_entity(
@@ -72,7 +72,7 @@ add_entity <- function(rocrate, entity, overwrite = FALSE) {
 #' @param overwrite Boolean flag to indicate if the existing value (if any),
 #'     should be overwritten (default: `TRUE`).
 #'
-#' @returns RO-Crate object
+#' @returns RO-Crate object.
 #' @export
 #'
 #' @examples
@@ -174,4 +174,61 @@ data_entity.organization <- function(x, ...) {
 data_entity.person <- function(x, ...) {
   args <- list(...)
   list(`@id` = getElement(args, "id"), `@type` = "Person")
+}
+
+#' Remove entity
+#'
+#' @inheritParams is_rocrate
+#' @param entity Entity object (list) that contains at least the following
+#'     components: `@id` and `@type`. Or, scalar value with entity `@id`.
+#'
+#' @returns Updated RO-Crate object.
+#' @export
+#'
+#' @examples
+#' basic_crate <- rocrateR::rocrate()
+#'
+#' # create entity for an organisation
+#' organisation_uol <- rocrateR::data_entity(
+#'   x = "https://ror.org/04xs57h96",
+#'   type = "Organization",
+#'   name = "University of Liverpool",
+#'   url = "http://www.liv.ac.uk"
+#' )
+#'
+#' # create an entity for a person
+#' person_rvd <- rocrateR::data_entity(
+#'   x = "https://orcid.org/0000-0001-5036-8661",
+#'   type = "Person",
+#'   name = "Roberto Villegas-Diaz",
+#'   affiliation = list(`@id` = organisation_uol$`@id`)
+#' )
+#'
+#' basic_crate_v2 <- basic_crate |>
+#'   rocrateR::add_entity(person_rvd) |>
+#'   rocrateR::add_entity_value(id = "./", key = "author", value = list(`@id` = person_rvd$`@id`)) |>
+#'   rocrateR::add_entity(organisation_uol) |>
+#'   rocrateR::remove_entity(person_rvd)
+remove_entity <- function(rocrate, entity) {
+  # check the `rocrate` object
+  is_rocrate(rocrate)
+
+  if (is.list(entity)) {
+    entity_id <- getElement(entity, "@id")
+  } else {
+    entity_id <- entity
+  }
+
+  # verify if the `entity` exists in the given crate
+  idx <- .find_id_index(rocrate, entity_id)
+
+  if (sum(idx) > 0) {
+    message("Removing the entity with @id = '",
+            entity_id, "'.")
+    rocrate$`@graph`[idx] <- NULL
+  } else {
+    warning("No entity found with @id = '", entity_id, "'.")
+  }
+
+  return(rocrate)
 }
