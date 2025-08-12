@@ -11,13 +11,14 @@
   extra_entities_lst <- list(...)
   if (length(extra_entities_lst) == 0)
     return(extra_entities_lst)
-  extra_entities_names <- names(extra_entities_lst)
-  # extract names for extra entities with missing names
-  idx <- is.null(extra_entities_names)
-  new_names <- extra_entities_lst[idx] |>
-    sapply(\(x) paste0(tolower(x$`@type`), "_" ,x$`@id`))
+  # extra_entities_names <- names(extra_entities_lst)
+  # # extract names for extra entities with missing names
+  # idx <- is.null(extra_entities_names)
+  new_names <- extra_entities_lst |>#[idx] |>
+    sapply(\(x) paste0(tolower(getElement(x, "@type")), "_" , getElement(x, "@id")))
   # assign new names
-  names(extra_entities_lst)[idx] <- new_names
+  # names(extra_entities_lst)[idx] <- new_names
+  names(extra_entities_lst) <- new_names
   return(extra_entities_lst)
 }
 
