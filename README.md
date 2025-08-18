@@ -62,7 +62,13 @@ print(my_first_ro_crate)
 #>     },
 #>     {
 #>       "@id": "./",
-#>       "@type": "Dataset"
+#>       "@type": "Dataset",
+#>       "name": "",
+#>       "description": "",
+#>       "datePublished": "2025-08-18",
+#>       "license": {
+#>         "@id": "http://spdx.org/licenses/CC-BY-4.0"
+#>       }
 #>     }
 #>   ]
 #> }
@@ -99,10 +105,16 @@ readLines(tmp)
 #> [13] "    },"                                                    
 #> [14] "    {"                                                     
 #> [15] "      \"@id\": \"./\","                                    
-#> [16] "      \"@type\": \"Dataset\""                              
-#> [17] "    }"                                                     
-#> [18] "  ]"                                                       
-#> [19] "}"
+#> [16] "      \"@type\": \"Dataset\","                             
+#> [17] "      \"name\": \"\","                                     
+#> [18] "      \"description\": \"\","                              
+#> [19] "      \"datePublished\": \"2025-08-18\","                  
+#> [20] "      \"license\": {"                                      
+#> [21] "        \"@id\": \"http://spdx.org/licenses/CC-BY-4.0\""   
+#> [22] "      }"                                                   
+#> [23] "    }"                                                     
+#> [24] "  ]"                                                       
+#> [25] "}"
 
 # delete temporal file
 unlink(tmp)
@@ -176,6 +188,12 @@ print(my_second_ro_crate)
 #>     {
 #>       "@id": "./",
 #>       "@type": "Dataset",
+#>       "name": "",
+#>       "description": "",
+#>       "datePublished": "2025-08-18",
+#>       "license": {
+#>         "@id": "http://spdx.org/licenses/CC-BY-4.0"
+#>       },
 #>       "author": {
 #>         "@id": "https://orcid.org/0000-0001-5036-8661"
 #>       }
