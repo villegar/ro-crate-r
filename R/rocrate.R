@@ -102,6 +102,10 @@ rocrate <- function(...,
 rocrate_5s <- function(...,
                        context = "https://w3id.org/ro/crate/1.2/context",
                        conformsTo = gsub("\\/context$", "\\1", context),
+                       datePublished = Sys.Date(),
+                       description = "",
+                       license = "http://spdx.org/licenses/CC-BY-4.0",
+                       name = "",
                        v5scrate = 0.4) {
   # create entity for the 5 safes profile
   v5scrate_id <- paste0("https://w3id.org/5s-crate/", v5scrate)
@@ -112,7 +116,13 @@ rocrate_5s <- function(...,
   )
 
   # create basic RO-Crate
-  new_ro_crate <- rocrate(..., context = context, conformsTo = conformsTo)
+  new_ro_crate <- rocrate(...,
+                          context = context,
+                          conformsTo = conformsTo,
+                          datePublished = datePublished,
+                          description = description,
+                          license = licence,
+                          name = name)
 
   # edit the new RO-Crate
   new_ro_crate <- new_ro_crate |>
