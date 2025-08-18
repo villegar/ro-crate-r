@@ -121,7 +121,7 @@ add_entity_value <- function(rocrate, id, key, value, overwrite = TRUE) {
 #' @param ... Optional additional entity values/properties. Used when `x` is
 #'     a single value.
 #'
-#' @returns List with a data entity object.
+#' @returns List with an entity object.
 #' @export
 #'
 #' @examples
@@ -149,12 +149,15 @@ entity <- function(x, ...) {
 #' @export
 entity.default <- function(x, ...) {
   args <- list(...)
-  list(
+  new_entity <- list(
     `@id` = c(x, getElement(args, "id"))[1],
     `@type` = getElement(args, "type")
   ) |>
     # append any additional properties
     c(suppressWarnings(within(args, rm(id, type))))
+  # attach 'entity' as a new class
+  class(new_entity) <- c("entity", class(new_entity))
+  return(new_entity)
 }
 
 #' Remove entity
