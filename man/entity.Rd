@@ -16,7 +16,7 @@ type \code{person} and \code{organisation} (equivalenly \code{organization}).}
 a single value.}
 }
 \value{
-List with a data entity object.
+List with an entity object.
 }
 \description{
 Create a data entity

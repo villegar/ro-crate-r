@@ -7,18 +7,40 @@
 rocrate(
   ...,
   context = "https://w3id.org/ro/crate/1.2/context",
-  conformsTo = gsub("\\\\/context$", "\\\\1", context)
+  conformsTo = gsub("\\\\/context$", "\\\\1", context),
+  datePublished = Sys.Date(),
+  description = "",
+  license = "http://spdx.org/licenses/CC-BY-4.0",
+  name = ""
 )
 }
 \arguments{
 \item{...}{Optional entities to include in the RO-Crate (e.g., author).}
 
 \item{context}{String with URL to the version of the RO-Crate specification
-to use. The context brings the defined terms into the metadata document.}
+to use. The context brings the defined terms into the metadata document
+(default: https://w3id.org/ro/crate/1.2/context).}
 
 \item{conformsTo}{String with URL to the version of the RO-Crate
 specification which this object conforms to. Conformance declares which
-RO-Crate conventions of using those terms are being followed.}
+RO-Crate conventions of using those terms are being followed
+(default: URL formed by \code{context}/context)}
+
+\item{datePublished}{String (or Date object) with the date in which the
+RO-Crate was published (default: current date).}
+
+\item{description}{String with description for the root entity (default:
+empty string).}
+
+\item{license}{String with URL (permalinks are preferred, but not required)
+to license to be used for the overall RO-Crate. See the following
+resources for license choices:
+\url{https://spdx.org/licenses} and/or
+\url{https://github.com/spdx/license-list-data/tree/main/jsonld}
+(default: CC-BY-4.0: Creative Commons Attribution 4.0 International).}
+
+\item{name}{String with a name/title for the root entity (default: empty
+string).}
 }
 \value{
 RO-Crate object, list with an additional class, \code{rocrate}.
