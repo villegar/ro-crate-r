@@ -121,7 +121,7 @@ rocrate_5s <- function(...,
                           conformsTo = conformsTo,
                           datePublished = datePublished,
                           description = description,
-                          license = licence,
+                          license = license,
                           name = name)
 
   # edit the new RO-Crate
