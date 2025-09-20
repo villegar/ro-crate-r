@@ -24,10 +24,6 @@ You can install the development version of rocrateR like so:
 
 ``` r
 # install.packages("pak")
-pak::pkg_install("villegar/ro-crate-r@main")
-
-OR
-
 pak::pkg_install("ResearchObject/ro-crate-r@main")
 ```
 
@@ -65,7 +61,7 @@ print(my_first_ro_crate)
 #>       "@type": "Dataset",
 #>       "name": "",
 #>       "description": "",
-#>       "datePublished": "2025-08-18",
+#>       "datePublished": "2025-09-20",
 #>       "license": {
 #>         "@id": "http://spdx.org/licenses/CC-BY-4.0"
 #>       }
@@ -108,7 +104,7 @@ readLines(tmp)
 #> [16] "      \"@type\": \"Dataset\","                             
 #> [17] "      \"name\": \"\","                                     
 #> [18] "      \"description\": \"\","                              
-#> [19] "      \"datePublished\": \"2025-08-18\","                  
+#> [19] "      \"datePublished\": \"2025-09-20\","                  
 #> [20] "      \"license\": {"                                      
 #> [21] "        \"@id\": \"http://spdx.org/licenses/CC-BY-4.0\""   
 #> [22] "      }"                                                   
@@ -190,7 +186,7 @@ print(my_second_ro_crate)
 #>       "@type": "Dataset",
 #>       "name": "",
 #>       "description": "",
-#>       "datePublished": "2025-08-18",
+#>       "datePublished": "2025-09-20",
 #>       "license": {
 #>         "@id": "http://spdx.org/licenses/CC-BY-4.0"
 #>       },

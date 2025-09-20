@@ -30,10 +30,6 @@ You can install the development version of rocrateR like so:
 
 ``` r
 # install.packages("pak")
-pak::pkg_install("villegar/ro-crate-r@main")
-
-OR
-
 pak::pkg_install("ResearchObject/ro-crate-r@main")
 ```
 
